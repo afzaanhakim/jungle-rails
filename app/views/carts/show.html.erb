@@ -3,7 +3,12 @@
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
-
+  <% if enhanced_cart.empty? %>
+  <div class="alert alert-danger">
+  <strong>Your cart is currently empty. Click <%= link_to 'Here', :root %> to go back to Home page and look for products! </strong>
+  </div>
+  
+  <% else %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -48,5 +53,5 @@
       <% end %>
     </div>
   </div>
-
+  <% end %>
 </section>
