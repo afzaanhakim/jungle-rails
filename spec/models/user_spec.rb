@@ -79,10 +79,73 @@ user2 = User.create(first_name: "Jane",
 last_name: "Doe",
 email: "XYZ@abc.com",
 password: "password",
-password: "password")
+)
   expect(@user).to_not be_valid
   expect(@user.errors.full_messages).to include "Email has already been taken"
 end
 
+end
+
+
+describe '.authenticate_with_credentials' do
+ it "login user when all credentials are correct" do
+@user = User.new
+ @user.first_name = "John"
+ @user.last_name = "Smith"
+ @user.email = "xyz@abc.com"
+ @user.password = "password"
+ @user.password_confirmation = "password"
+ @user.save
+ user = User.authenticate_with_credentials(@user.email, @user.password)
+ expect(user).to eq @user
+end
+
+it "does not login user when email is incorrect" do
+  @user = User.new
+   @user.first_name = "John"
+   @user.last_name = "Smith"
+   @user.email = "xyz@abc.com"
+   @user.password = "password"
+   @user.password_confirmation = "password"
+   @user.save
+   user = User.authenticate_with_credentials("pizza@pasta.com", @user.password)
+   expect(user).to_not eq @user
+  end
+
+  it "does not login user when password is incorrect" do
+    @user = User.new
+     @user.first_name = "John"
+     @user.last_name = "Smith"
+     @user.email = "xyz@abc.com"
+     @user.password = "password"
+     @user.password_confirmation = "password"
+     @user.save
+     user = User.authenticate_with_credentials(@user.email, "soup")
+     expect(user).to eq nil
+    end
+
+    it "login user when whitespace before or after email in login form" do
+      @user = User.new
+       @user.first_name = "John"
+       @user.last_name = "Smith"
+       @user.email = "xyz@abc.com"
+       @user.password = "password"
+       @user.password_confirmation = "password"
+       @user.save
+       user = User.authenticate_with_credentials(" " + @user.email + " ", @user.password)
+       expect(user).to eq @user
+      end
+
+      it "login user when user types in his email in wrong case in login form" do
+        @user = User.new
+         @user.first_name = "John"
+         @user.last_name = "Smith"
+         @user.email = "xyz@abc.com"
+         @user.password = "password"
+         @user.password_confirmation = "password"
+         @user.save
+         user = User.authenticate_with_credentials("XYZ@abC.Com", @user.password)
+         expect(user).to eq @user
+        end
 end
 end
