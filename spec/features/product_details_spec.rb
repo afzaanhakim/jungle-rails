@@ -22,7 +22,6 @@ RSpec.feature "Visitor clicks on product in home page", type: :feature, js: true
     puts page.html
     first(".product img").click
 
-  save_screenshot
     expect(page).to have_content("Description")
     expect(page).to have_content("»")
     expect(page).to have_content("Name")
