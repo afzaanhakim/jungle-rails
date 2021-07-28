@@ -4,6 +4,15 @@ Welcome to Jungle! An e-commerce app that helps you find unique products which y
 
 ** Built with Rails 4.2 **
 
+## Screenshots
+Home Page
+!["Home Page"](https://github.com/afzaanhakim/jungle-rails/blob/master/docs/Homepage.png?raw=true)
+
+Login Page
+!["Login Page"](https://github.com/afzaanhakim/jungle-rails/blob/master/docs/Login%20Page.png?raw=true)
+
+My Cart
+!["My Cart"](https://github.com/afzaanhakim/jungle-rails/blob/master/docs/My%20Cart.png?raw=true)
 
 ## Additional Steps for Apple M1 Machines
 
